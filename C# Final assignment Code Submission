@@ -1,0 +1,121 @@
+static void Main(string[] args)
+{
+char player = 'X';
+char[,] board = new char[3, 3];
+
+Initialize(board);
+
+int movesPlayed = 0;
+
+//The game plays on until there is a definite winner/loser/draw
+while (true)
+{
+Console.Clear();
+Print(board);
+
+Console.Write("Enter a row: ");
+int row = Convert.ToInt32(Console.ReadLine());
+Console.Write("Enter a column: ");
+int col = Convert.ToInt32(Console.ReadLine());
+
+board[row, col] = player;
+
+//Checking if either Player 1 or Player 2 won - This has the different ways Player 1 or 2 can win the game
+{
+if (player == board[0, 0] && player == board[1, 0] && player == board[2, 0])
+{
+Console.WriteLine(player + " has won the game!");
+break;
+}
+else if (player == board[0, 1] && player == board[1, 1] && player == board[2, 1])
+{
+Console.WriteLine(player + " has won the game!");
+break;
+}
+else if (player == board[0, 2] && player == board[1, 2] && player == board[2, 2])
+{
+Console.WriteLine(player + " has won the game!");
+break;
+}
+else if (player == board[0, 0] && player == board[1, 1] && player == board[2, 2])
+{
+Console.WriteLine(player + " has won the game!");
+break;
+}
+else if (player == board[0, 2] && player == board[1, 1] && player == board[2, 0])
+{
+Console.WriteLine(player + " has won the game!");
+break;
+}
+else if (player == board[0, 0] && player == board[0, 1] && player == board[0, 2])
+{
+Console.WriteLine(player + " has won the game!");
+break;
+}
+else if (player == board[1, 0] && player == board[1, 1] && player == board[1, 2])
+{
+Console.WriteLine(player + " has won the game!");
+break;
+}
+else if (player == board[2, 0] && player == board[2, 1] && player == board[2, 2])
+{
+Console.WriteLine(player + " has won the game!");
+break;
+}
+}
+//Checks if neither Player 1 or Player 2 won - A Draw
+movesPlayed = movesPlayed + 1;
+
+if (movesPlayed == 9)
+{
+Console.WriteLine("It's a Draw!");
+break;
+}
+
+player = ChangeTurn(player);
+}
+
+Console.ReadLine();
+}
+
+//This will change turns between different players
+static char ChangeTurn(char currentPlayer)
+{
+if (currentPlayer == 'X')
+{
+return 'O';
+}
+else
+{
+return 'X';
+}
+}
+
+//This program will initialize the board, in other words set-up the board again for another game
+static void Initialize(char[,] board)
+{
+for (int row = 0; row < 3; row++)
+{
+for (int col = 0; col < 3; col++)
+{
+board[row, col] = ' ';
+}
+}
+}
+//This will display/print the board of the game and show the numbers used to enter for the row and column
+static void Print(char[,] board)
+{
+Console.WriteLine("  | 0 | 1 | 2 |");
+for (int row = 0; row < 3; row++)
+{
+Console.Write(row + " | ");
+for (int col = 0; col < 3; col++)
+{
+Console.Write(board[row, col]);
+Console.Write(" | ");
+}
+Console.WriteLine();
+}
+}
+}
+}
